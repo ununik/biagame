@@ -32,8 +32,6 @@ class Registration extends Connection
 		$db = parent::connect();
 		$timestamp = time();
 		$result = $db->prepare("INSERT INTO `user`(`mail`, `login`, `passwordHash`, `created`) VALUES (?, ?, ?, ?)");
-		//$result->execute(array($mail, $login, $passwordHash, $timestamp));
-		$result->execute(array('test', 'test', 'test', 'test'));
-
+		$result->execute(array($mail, $login, $passwordHash, $timestamp));
 	}
 }
