@@ -1,10 +1,20 @@
 <?php
 class HTML
 {
+	private $getPage = 'home';
 	private $script = '';
 	private $headlineTitle = 'BIAGAME';
 	private $content = '';
 	private $footer = 'footer';
+	
+	public function setGetPage($new)
+	{
+		$this->getPage = $new;
+	}
+	public function getGetPage()
+	{
+		return $this->getPage;
+	}
 
 	public function addScript($new)
 	{
