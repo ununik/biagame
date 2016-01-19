@@ -10,6 +10,7 @@ return "
     <body>
     	<div id='headline'>
     		<h1>{$html->getHeadlineTitle()}</h1>
+    		<div id='headerPanel'>{$html->getHeader()}</div>
     		<div id='navigation'>{$html->getNavigation()}</div>
     	</div>
 		<div id='content'>{$html->getContent()}</div>

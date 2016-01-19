@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);
 include '../models/config.php';
 include '../models/helpers.php';
 function __autoload($name)
@@ -11,7 +10,7 @@ $login = safeText($_POST['login']);
 $password = safeText($_POST['password']);
 $loginCLASS = new Login();
 
-if($loginCLASS->validateLogin != true){
+if($loginCLASS->validateLogin($login, $password) != true){
 	$err[] = "Špatné jméno nebo heslo!";
 	foreach ($err as $err)
 	{
@@ -19,7 +18,6 @@ if($loginCLASS->validateLogin != true){
 		return;
 	}
 }else{
-	setcookie("BIAGAME", $login.'_;_'.$password, time()+3600*7);
 	echo 1;
 	return;
 }

@@ -19,8 +19,7 @@ if(strlen($mail) < 1){
 	$err[] = 'Není vyplněný mail!';
 }else if(strlen($mail) > 255){
 	$err[] = 'Příliš dlouhý mail!';
-}
-if($registration->checkEmptyMail($mail) != true){
+}else if($registration->checkEmptyMail($mail) != true){
 	$err[] = 'Tento email už někdo používá!';
 }
 

@@ -1,6 +1,7 @@
 <?php
 $html->addScript('<script src="js/ajax.js"></script>');
 $html->addScript('<script src="js/registration.js"></script>');
+$html->addScript('<script src="js/login.js"></script>');
 
 $html->addContent("<div id='status'></div>");
 $html->addContent(include('views/registration/form.php'));

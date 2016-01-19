@@ -4,10 +4,11 @@ class HTML
 	private $getPage = 'home';
 	private $script = '';
 	private $headlineTitle = 'BIAGAME';
+	private $header = '';
 	private $navigation = '';
 	private $content = '';
 	private $footer = 'footer';
-	
+
 	public function setGetPage($new)
 	{
 		$this->getPage = $new;
@@ -30,7 +31,7 @@ class HTML
 	{
 		return $this->headlineTitle;
 	}
-	
+
 	public function addToNavigation($new)
 	{
 		$this->navigation .= $new;
@@ -38,6 +39,15 @@ class HTML
 	public function getNavigation()
 	{
 		return $this->navigation;
+	}
+
+	public function addHeader($new)
+	{
+		$this->header .= $new;
+	}
+	public function getHeader()
+	{
+		return $this->header;
 	}
 
 	public function addContent($new)

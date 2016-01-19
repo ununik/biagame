@@ -8,9 +8,9 @@ class Registration extends Connection
 		$result->execute(array($mail));
 		$mailId = $result->fetch();
 		if($mailId['id'] != ""){
-			return true;
-		}else
 			return false;
+		}else
+			return true;
 	}
 
 	public function checkEmptyLogin($login)
@@ -20,9 +20,9 @@ class Registration extends Connection
 		$result->execute(array($login));
 		$mailId = $result->fetch();
 		if($mailId['id'] != ""){
-			return true;
-		}else
 			return false;
+		}else
+			return true;
 	}
 
 	public function createUser($mail, $login, $password)
