@@ -24,6 +24,7 @@ if($profil->log == false)
 	}
 	if(file_exists ("controllers/log/{$html->getGetPage()}.php")){
 		include "controllers/log/{$html->getGetPage()}.php";
+		include "controllers/log/navigation/navigation.php";
 	}else{
 		include "controllers/noPageFound.php";
 	}
