@@ -1,2 +1,3 @@
 <?php
-$html->addHeader("<div>{$profil->getFullMouney()}</div>");
+$html->addHeader("<a href='?page=money'><div>{$profil->getFullMouney()}</div></a>");
+$html->addHeader("<div>{$profil->getFullEnergyAndMaxEnergy()}</div>");

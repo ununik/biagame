@@ -4,6 +4,7 @@ class HTML
 	private $getPage = 'home';
 	private $script = '';
 	private $headlineTitle = 'BIAGAME';
+	private $title = 'BIAGAME';
 	private $header = '';
 	private $navigation = '';
 	private $content = '';
@@ -16,6 +17,11 @@ class HTML
 	public function getGetPage()
 	{
 		return $this->getPage;
+	}
+
+	public function getTitle()
+	{
+		return $this->title;
 	}
 
 	public function addScript($new)

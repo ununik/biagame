@@ -15,6 +15,7 @@ class Profil extends Connection
 	 * beginning of the game
 	 * @var int (1 or 0) $introduction
 	 */
+	private $secToGetONEenergy = 1800; // 0.5 hod na 1 bod
 	private $introduction = 0;
 	private $firstname = '';
 	private $lastname = '';
@@ -22,6 +23,11 @@ class Profil extends Connection
 	private $gender = '';
 	private $age = '';
 	private $nationality = 0;
+	private $actualEnergy = 0;
+	private $maxEnergy = 0;
+	private $jobExpierence = 0;
+	private $level = 0;
+	private $lastEnergyTimestamp;
 
 	public function __construct($session = 0, $login = "", $password = "")
 	{
@@ -40,6 +46,7 @@ class Profil extends Connection
 		if($userId['id'] != ""){
 			$this->log = true;
 			$this->id = $userId['id'];
+			$_SESSION['profil_id'] = $this->id;
 			$this->introduction = $userId['introduction'];
 			$this->login = $userId['login'];
 			$this->firstname = $userId['firstname'];
@@ -48,7 +55,14 @@ class Profil extends Connection
 			$this->age = $userId['age'];
 			$this->nationality = $userId['nationality'];
 			$this->money = $userId['money'];
+			$this->actualEnergy = $userId['energy'];
+			$this->maxEnergy = $userId['maxenergy'];
+			$this->jobExpierence = $userId['jobExpierence'];
+			$this->level = $userId['level'];
+			$this->lastEnergyTimestamp = $userId['lastEnergyTimestamp'];
 		}
+
+		$this->energyRecovery();
 	}
 
 	/**
@@ -62,12 +76,44 @@ class Profil extends Connection
 			return false;
 		}
 	}
+
+	public function energyRecovery()
+	{
+		if($this->actualEnergy < $this->maxEnergy)
+		{
+			$time = time();
+			$timeFromLastActivity = $time - $this->lastEnergyTimestamp;
+			if($timeFromLastActivity > $this->secToGetONEenergy){
+				$modulo = $timeFromLastActivity % $this->secToGetONEenergy;
+				$plus_energy = (int) ($timeFromLastActivity - $modulo) / $this->secToGetONEenergy;
+				$timeLastChange = $time - $modulo;
+
+				$newEnergy = $this->actualEnergy + $plus_energy;
+				if($newEnergy > $this->maxEnergy){
+					$newEnergy = $this->maxEnergy;
+				}
+
+				$db = parent::connect();
+				$result = $db->prepare("UPDATE `user` SET `energy`=?, `lastEnergyTimestamp`=? WHERE id=?");
+				$result->execute(array( $newEnergy, $timeLastChange, $this->id));
+			}
+		}
+	}
 	/**
 	 * Get user id
 	 */
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	public function getLevel()
+	{
+		return $this->level;
+	}
+	public function getJobExpierence()
+	{
+		return $this->jobExpierence;
 	}
 	/**
 	 * Get "firstname lastname (login)"
@@ -116,6 +162,18 @@ class Profil extends Connection
 	public function getFullMouney()
 	{
 		return "{$this->money} EUR";
+	}
+	public function getMoney()
+	{
+		return $this->money;
+	}
+	public function getFullEnergyAndMaxEnergy()
+	{
+		return "{$this->actualEnergy}/{$this->maxEnergy}";
+	}
+	public function getActulaEnergy()
+	{
+		return $this->actualEnergy;
 	}
 
 	/**
