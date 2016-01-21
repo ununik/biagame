@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);
 include '../models/config.php';
 include '../models/helpers.php';
 function __autoload($name)
@@ -53,7 +52,7 @@ if($rules == 'false'){
 
 if(count($err) < 1){
 	$registration->createUser($mail, $login, $password);
-	echo 'registrated';
+	echo 'Úspěšně registrováno. Nyní se lze přihlásit';
 }
 
 foreach ($err as $err)

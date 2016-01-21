@@ -18,6 +18,8 @@ if(!isset($_SESSION['profil_id']) || $_SESSION['profil_id']!=""){
 	$profil = new Profil($_SESSION['profil_id']);
 }
 $html = new HTML();
+$html->addCss("<link href='https://fonts.googleapis.com/css?family=Patrick+Hand&subset=latin,latin-ext' rel='stylesheet' type='text/css'>");
+$html->addCss('<link rel="stylesheet" href="css/basicPage.css" type="text/css">');
 
 if($profil->log == false || $profil->getId() == 0)
 {

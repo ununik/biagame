@@ -21,7 +21,7 @@ class Store extends Connection
 		return $items;
 	}
 
-	public function getItemById($id, $level)
+	public function getItemById($id, $level = 100000)
 	{
 		$db = parent::connect();
 		$result = $db->prepare("SELECT * FROM `store_Items` WHERE (`id`=? && `level`<=? && `allowedInStore`=?) ORDER BY `price` DESC ");

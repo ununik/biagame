@@ -3,6 +3,7 @@ class HTML
 {
 	private $getPage = 'home';
 	private $script = '';
+	private $css = '';
 	private $headlineTitle = 'BIAGAME';
 	private $title = 'BIAGAME';
 	private $header = '';
@@ -31,6 +32,15 @@ class HTML
 	public function getScript()
 	{
 		return $this->script;
+	}
+	
+	public function addCss($new)
+	{
+		$this->css .= $new;
+	}
+	public function getCss()
+	{
+		return $this->css;
 	}
 
 	public function getHeadlineTitle()
