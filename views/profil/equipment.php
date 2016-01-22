@@ -1,6 +1,6 @@
 <?php
 //MAN
-$container = "<table border='1px'>";
+$container = "<div id='wrapper1'><table id='equipment' border=1px>";
 
 //HEAD
 	$container .= "<tr>";
@@ -28,11 +28,11 @@ $container = "<table border='1px'>";
 //FEET (BOOTS)
 	$container .= "<tr><td colspan='3'></td></tr>";
 
-$container .= "</table>";
+$container .= "</table></div>";
 
 
 //OTHER
-$container .= "<table border='1px'>";
+$container .= "<div id='wrapper2'><table id='equipment2' border='1px'>";
 
 //WEAPON
 	$container .= "<tr><td></td></tr>";
@@ -41,7 +41,7 @@ $container .= "<tr><td></td></tr>";
 //SKI
 	$container .= "<tr><td></td></tr>";
 
-$container .= "</table>";
+$container .= "</table></div>";
 
 
 return $container;

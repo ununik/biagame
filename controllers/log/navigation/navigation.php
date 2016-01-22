@@ -4,4 +4,4 @@
 
 	$html->addToNavigation('<a href="?page=profil">Profil</a>');
 	$html->addToNavigation('<a href="?page=store">Obchod</a>');
-	$html->addToNavigation('<span onclick="logout()">Odhlasit se</span>');
+	$html->addToNavigation('<a onclick="logout()">Odhlasit se</a>');

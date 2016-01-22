@@ -1,0 +1,27 @@
+#profil_table{
+	width: 26%;
+	float: left;
+	border-collapse: collapse;
+}
+#profil_table tr:nth-child(1) td{
+	font-size: 26px;
+	font-weight: bold;
+}
+#profil_table tr:nth-child(n+2) td:nth-child(1) {
+	width: 75px;
+	text-align: right;
+	padding-right: 10px;
+}
+#profil_table tr:nth-child(even){
+	background-color: rgba(25,25,112, 0.1);
+}
+#equipment {
+    border-collapse: collapse;
+	float: left;
+	width: 32%;
+    float:left;
+}
+#equipment2{
+	
+}
+
