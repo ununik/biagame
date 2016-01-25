@@ -1,11 +1,4 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: ununik
- * Date: 18.08.2015
- * Time: 16:47
- */
 class Connection
 {
     protected function connect()

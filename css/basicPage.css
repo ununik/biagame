@@ -39,13 +39,13 @@ h3{
 	display: inline-block;
 }
 #content{
-	margin: 150px 95px 0px 95px;
+	margin: 150px 95px 0px 145px;
 }
 #navigation{
 	position: absolute;
 	top: 150px;
 	left: 0px;
-	width: 85px;
+	width: 135px;
 }
 #navigation a{
 	display: block;
