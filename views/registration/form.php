@@ -6,11 +6,11 @@ $container .= "<tr>
 		</tr>";
 $container .= "<tr>
 		<td><label for='mail_registration'>mail:</label></td>
-		<td><input type='text' id='mail_registration' onkeypress='if (event.keyCode==13){ registrationFormSend();}'></td>
+		<td><input type='text' id='mail_registration' onkeypress='if (event.keyCode==13){ registrationFormSend();}' onchange='emailValidator(this)'></td>
 		</tr>";
 $container .= "<tr>
 		<td><label for='login_registration'>login:</label></td>
-		<td><input type='text' id='login_registration' onkeypress='if (event.keyCode==13){ registrationFormSend();}'></td>
+		<td><input type='text' id='login_registration' onkeypress='if (event.keyCode==13){ registrationFormSend();}  onchange='loginValidator(this)''></td>
 		</tr>";
 $container .= "<tr>
 		<td><label for='password_registration'>heslo:</label></td>

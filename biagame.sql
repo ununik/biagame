@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: localhost
--- Vygenerováno: Stř 20. led 2016, 17:27
+-- Vygenerováno: Pon 25. led 2016, 17:18
 -- Verze serveru: 5.5.46-0ubuntu0.14.04.2
 -- Verze PHP: 5.5.9-1ubuntu4.14
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `timestamp` int(15) NOT NULL,
   `idActivity` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Vypisuji data pro tabulku `activity`
@@ -63,7 +63,66 @@ INSERT INTO `activity` (`id`, `user`, `job`, `timestamp`, `idActivity`) VALUES
 (21, 1, 1, 1453299565, 1),
 (22, 1, 1, 1453299566, 1),
 (23, 1, 1, 1453299567, 1),
-(24, 1, 1, 1453299567, 1);
+(24, 1, 1, 1453299567, 1),
+(25, 1, 1, 1453458224, 1),
+(26, 1, 1, 1453458225, 1),
+(27, 1, 1, 1453458226, 1),
+(28, 1, 1, 1453458227, 1),
+(29, 1, 1, 1453458228, 1),
+(30, 1, 1, 1453458229, 1),
+(31, 1, 1, 1453458230, 1),
+(32, 1, 1, 1453458231, 1),
+(33, 1, 1, 1453715482, 1),
+(34, 1, 1, 1453715484, 1),
+(35, 1, 1, 1453715485, 1),
+(36, 1, 1, 1453715485, 1),
+(37, 1, 1, 1453715486, 1),
+(38, 1, 1, 1453715487, 1),
+(39, 1, 1, 1453715487, 1),
+(40, 1, 1, 1453715488, 1),
+(41, 1, 1, 1453715489, 1),
+(42, 1, 1, 1453715489, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `competition_category_level`
+--
+
+CREATE TABLE IF NOT EXISTS `competition_category_level` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `type` int(10) NOT NULL,
+  `level` int(10) NOT NULL,
+  `energy` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Vypisuji data pro tabulku `competition_category_level`
+--
+
+INSERT INTO `competition_category_level` (`id`, `title`, `type`, `level`, `energy`) VALUES
+(1, 'Regionalni zavod', 1, 1, 25);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `competition_category_type`
+--
+
+CREATE TABLE IF NOT EXISTS `competition_category_type` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Vypisuji data pro tabulku `competition_category_type`
+--
+
+INSERT INTO `competition_category_type` (`id`, `title`) VALUES
+(1, 'Biatlon');
 
 -- --------------------------------------------------------
 
@@ -111,6 +170,34 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 INSERT INTO `jobs` (`id`, `name`, `description`, `energy`, `money`, `time`, `level`, `jobExpierence`, `addExpierence`) VALUES
 (1, 'TEST1', 'dasdska fjkshfjakshdkjshfjh djkfh jskdh faskj hdkjfhajsk fjhkjf jksdkjf s', 10, 5, 10, 1, 0, 1),
 (2, 'TEST2', 'dasdska fjkshfjakshdkjshfjh djkfh jskdh faskj hdkjfhajsk fjhkjf jksdkjf s', 110, 5, 10, 1, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `reality`
+--
+
+CREATE TABLE IF NOT EXISTS `reality` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `level` int(10) NOT NULL,
+  `price` int(15) NOT NULL,
+  `in_reality_store` tinyint(1) NOT NULL,
+  `shoootingRange` tinyint(1) NOT NULL,
+  `tracks` tinyint(1) NOT NULL,
+  `technicalCapacity` tinyint(1) NOT NULL COMMENT 'zazemi',
+  `psychika` int(10) NOT NULL,
+  `competition` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Vypisuji data pro tabulku `reality`
+--
+
+INSERT INTO `reality` (`id`, `title`, `description`, `level`, `price`, `in_reality_store`, `shoootingRange`, `tracks`, `technicalCapacity`, `psychika`, `competition`) VALUES
+(1, 'Nejaka bouda', 'Krasny maly domecek v podhuri Alp', 1, 1100, 1, 0, 1, 1, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -191,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `level`, `jobExpierence`, `mail`, `login`, `passwordHash`, `money`, `created`, `introduction`, `gender`, `firstname`, `lastname`, `nationality`, `age`, `energy`, `maxenergy`, `lastEnergyTimestamp`) VALUES
-(1, 1, 10, 'ununik@gmail.com', 'ununik', 'c501186efd715564711a9034c4a8e492', 20, 1453192005, 1, 'm', 'Martin', 'Pribyl', 1, 29, 4, 100, 1453306767);
+(1, 1, 28, 'ununik@gmail.com', 'ununik', 'c501186efd715564711a9034c4a8e492', 110, 1453192005, 1, 'm', 'Martin', 'Pribyl', 1, 29, 3, 100, 1453720889);
 
 -- --------------------------------------------------------
 

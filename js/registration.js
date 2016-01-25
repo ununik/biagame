@@ -24,3 +24,27 @@ function registrationFormSend(){
 	mypostrequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 	mypostrequest.send(parameters)
 }
+function validateEmail(email) 
+{
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+function emailValidator(input){
+	var email = input.value;
+	if(validateEmail(email) == false){
+		
+		input.style.border = '1px solid red';
+		return false;
+	}
+	return true;
+}
+
+function loginValidator(input){
+	var login = input.value;
+	if(login.length < 1){
+		
+		input.style.border = '1px solid red';
+		return false;
+	}
+	return true;
+}

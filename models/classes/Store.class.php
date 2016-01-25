@@ -15,7 +15,7 @@ class Store extends Connection
 	{
 		$db = parent::connect();
 		$result = $db->prepare("SELECT * FROM `store_Items` WHERE (`category`=? && `level`<=? && `allowedInStore`=?) ORDER BY `price` DESC ");
-		$result->execute(array($category, 1, $level));
+		$result->execute(array($category, $level, 1));
 		$items = $result->fetchAll();
 
 		return $items;
