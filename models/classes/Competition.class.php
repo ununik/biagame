@@ -88,6 +88,10 @@ class Competition extends Connection
 
 			$result = $db->prepare("UPDATE `user` SET `competition_experience`=?, `energy`=? WHERE `id`=?");
 			$result->execute(array($results[$i]['exeperience']+1, $profil->getActulaEnergy() - $resultsUser[$i]['energy'],$resultsUser[$i]['user']));
+
+			$timestamp = time();
+			$result = $db->prepare("INSERT INTO `activity`(`user`, `competition`, `timestamp`, `idActivity`) VALUES (?, ?, ?, ?)");
+			$result->execute(array($resultsUser[$i]['user'], 1, $timestamp, $competition));
 	}
 
 //RESULTS
