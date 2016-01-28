@@ -1,5 +1,4 @@
 <?php
-$html->addScript('<script src="js/ajax.js"></script>');
 $html->addScript('<script src="js/store.js"></script>');
 
 
