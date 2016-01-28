@@ -9,10 +9,12 @@ class Competition extends Connection
 		$db = parent::connect();
 		$timestamp = time();
 
-		$result = $db->prepare("SELECT id FROM `competition` WHERE `date`<? && results_done=? ");
-		$result->execute(array($timestamp, 0));
+		$result = $db->prepare("SELECT id FROM `competition` WHERE `date`<? && results_done=? && results=?");
+		$result->execute(array($timestamp, 0, 0));
 		$items = $result->fetchAll();
 
+		$result = $db->prepare("UPDATE `competition` SET `results`=? WHERE `date`<?");
+		$result->execute(array(1, $timestamp));
 		foreach ($items as $item)
 		{
 			$this->doResults($item['id']);
