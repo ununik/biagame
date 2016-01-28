@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: localhost
--- Vygenerováno: Pon 25. led 2016, 17:18
--- Verze serveru: 5.5.46-0ubuntu0.14.04.2
+-- Vygenerováno: Čtv 28. led 2016, 16:54
+-- Verze serveru: 5.5.47-0ubuntu0.14.04.1
 -- Verze PHP: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `timestamp` int(15) NOT NULL,
   `idActivity` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Vypisuji data pro tabulku `activity`
@@ -81,7 +81,58 @@ INSERT INTO `activity` (`id`, `user`, `job`, `timestamp`, `idActivity`) VALUES
 (39, 1, 1, 1453715487, 1),
 (40, 1, 1, 1453715488, 1),
 (41, 1, 1, 1453715489, 1),
-(42, 1, 1, 1453715489, 1);
+(42, 1, 1, 1453715489, 1),
+(43, 1, 1, 1453890168, 1),
+(44, 1, 1, 1453890169, 1),
+(45, 1, 1, 1453890171, 1),
+(46, 1, 1, 1453890172, 1),
+(47, 1, 1, 1453890173, 1),
+(48, 1, 1, 1453890174, 1),
+(49, 1, 1, 1453890175, 1),
+(50, 1, 1, 1453890176, 1),
+(51, 1, 1, 1453890178, 1),
+(52, 1, 1, 1453976591, 1),
+(53, 1, 1, 1453979619, 1),
+(54, 1, 1, 1453979621, 1),
+(55, 1, 1, 1453979622, 1),
+(56, 1, 1, 1453979623, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `competition`
+--
+
+CREATE TABLE IF NOT EXISTS `competition` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `level` int(10) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `user` int(15) NOT NULL COMMENT 'id from user',
+  `place` int(15) NOT NULL COMMENT 'id from competition_places',
+  `energy` int(15) NOT NULL,
+  `start_price` int(15) NOT NULL,
+  `maxPeople` int(10) NOT NULL,
+  `type` int(11) NOT NULL COMMENT 'id from competition_category_type',
+  `date` int(20) NOT NULL COMMENT 'timestamp of the competition',
+  `results` tinyint(1) NOT NULL,
+  `results_done` tinyint(1) NOT NULL,
+  `muscles` int(15) NOT NULL,
+  `endurance` int(15) NOT NULL,
+  `stability` int(15) NOT NULL,
+  `psyche` int(15) NOT NULL,
+  `morale` int(15) NOT NULL,
+  `accuracy` int(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Vypisuji data pro tabulku `competition`
+--
+
+INSERT INTO `competition` (`id`, `level`, `title`, `description`, `user`, `place`, `energy`, `start_price`, `maxPeople`, `type`, `date`, `results`, `results_done`, `muscles`, `endurance`, `stability`, `psyche`, `morale`, `accuracy`) VALUES
+(1, 1, 'Nejaky zavod', 'dsaf sjfkh dsjkfh ksdh fkjshdkfh skdhfkjsdkjh fdsjh sdhkj hfskd ', 0, 0, 15, 15, 1000, 1, 1453987540, 0, 1, 1, 1, 2, 2, 1, 7),
+(2, 1, 'CP', 'das uisdasdfgjhadsf jdsafkjasgh dghsakjg adshhjg zxkjcvh zxjchv jzxchvg xzchjgv jhxczg jhzcxg jhxzcgvj hxcjhvgxzcjhkvjxhcjhghjxzcvjhgxzjchgjhxzcvxjchvkjgxcvhjx', 0, 0, 10, 150, 10, 1, 1453984540, 0, 1, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -123,6 +174,35 @@ CREATE TABLE IF NOT EXISTS `competition_category_type` (
 
 INSERT INTO `competition_category_type` (`id`, `title`) VALUES
 (1, 'Biatlon');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `competition_registration`
+--
+
+CREATE TABLE IF NOT EXISTS `competition_registration` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `user` int(15) NOT NULL,
+  `competition` int(15) NOT NULL,
+  `timestamp` int(20) NOT NULL,
+  `prone` int(5) NOT NULL,
+  `standing` int(5) NOT NULL,
+  `result` int(15) NOT NULL,
+  `time` int(20) NOT NULL,
+  `prone_points` int(15) NOT NULL,
+  `standing_points` int(15) NOT NULL,
+  `time_points` int(15) NOT NULL,
+  `rand` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Vypisuji data pro tabulku `competition_registration`
+--
+
+INSERT INTO `competition_registration` (`id`, `user`, `competition`, `timestamp`, `prone`, `standing`, `result`, `time`, `prone_points`, `standing_points`, `time_points`, `rand`) VALUES
+(3, 1, 1, 1453985396, 0, 0, 1, 0, 217, 283, 0, 1165);
 
 -- --------------------------------------------------------
 
@@ -269,6 +349,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `energy` int(10) NOT NULL DEFAULT '100',
   `maxenergy` int(10) NOT NULL DEFAULT '100',
   `lastEnergyTimestamp` int(20) NOT NULL,
+  `muscles` int(15) NOT NULL DEFAULT '5' COMMENT 'svaly',
+  `accuracy` int(15) NOT NULL DEFAULT '5' COMMENT 'presnost',
+  `endurance` int(15) NOT NULL DEFAULT '5' COMMENT 'vytrvalost',
+  `stability` int(15) NOT NULL DEFAULT '5' COMMENT 'stabilita',
+  `competition_experience` int(15) NOT NULL DEFAULT '5' COMMENT 'zavodni zkusenost',
+  `psyche` int(15) NOT NULL DEFAULT '5' COMMENT 'psychika',
+  `morale` int(15) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -277,8 +364,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Vypisuji data pro tabulku `user`
 --
 
-INSERT INTO `user` (`id`, `level`, `jobExpierence`, `mail`, `login`, `passwordHash`, `money`, `created`, `introduction`, `gender`, `firstname`, `lastname`, `nationality`, `age`, `energy`, `maxenergy`, `lastEnergyTimestamp`) VALUES
-(1, 1, 28, 'ununik@gmail.com', 'ununik', 'c501186efd715564711a9034c4a8e492', 110, 1453192005, 1, 'm', 'Martin', 'Pribyl', 1, 29, 3, 100, 1453720889);
+INSERT INTO `user` (`id`, `level`, `jobExpierence`, `mail`, `login`, `passwordHash`, `money`, `created`, `introduction`, `gender`, `firstname`, `lastname`, `nationality`, `age`, `energy`, `maxenergy`, `lastEnergyTimestamp`, `muscles`, `accuracy`, `endurance`, `stability`, `competition_experience`, `psyche`, `morale`) VALUES
+(1, 1, 42, 'ununik@gmail.com', 'ununik', 'c501186efd715564711a9034c4a8e492', 80, 1453192005, 1, 'm', 'Martin', 'Pribyl', 1, 29, 0, 100, 1453995823, 5, 5, 5, 5, 8, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -292,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `user_items` (
   `timestamp` int(20) NOT NULL,
   `user` int(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Vypisuji data pro tabulku `user_items`
@@ -318,7 +405,8 @@ INSERT INTO `user_items` (`id`, `item`, `timestamp`, `user`) VALUES
 (17, 1, 1453307212, 1),
 (18, 1, 1453307212, 1),
 (19, 1, 1453307212, 1),
-(20, 1, 1453307212, 1);
+(20, 1, 1453307212, 1),
+(21, 1, 1453890081, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

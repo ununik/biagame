@@ -28,6 +28,13 @@ class Profil extends Connection
 	private $jobExpierence = 0;
 	private $level = 0;
 	private $lastEnergyTimestamp;
+	private $muscles;
+	private $accuracy;
+	private $endurance;
+	private $stability;
+	private $psyche;
+	private $morale;
+	private $competition_experience;
 
 	public function __construct($session = 0, $login = "", $password = "")
 	{
@@ -60,6 +67,13 @@ class Profil extends Connection
 			$this->jobExpierence = $userId['jobExpierence'];
 			$this->level = $userId['level'];
 			$this->lastEnergyTimestamp = $userId['lastEnergyTimestamp'];
+			$this->muscles = $userId['muscles'];
+			$this->accuracy = $userId['accuracy'];
+			$this->endurance = $userId['endurance'];
+			$this->stability = $userId['stability'];
+			$this->psyche = $userId['psyche'];
+			$this->morale = $userId['morale'];
+			$this->competition_experience = $userId['competition_experience'];
 		}
 
 		$this->energyRecovery();
@@ -174,6 +188,34 @@ class Profil extends Connection
 	public function getActulaEnergy()
 	{
 		return $this->actualEnergy;
+	}
+	public function getMuscles()
+	{
+		return $this->muscles;
+	}
+	public function getAccuracy()
+	{
+		return $this->accuracy;
+	}
+	public function getEndurance()
+	{
+		return $this->endurance;
+	}
+	public function getStability()
+	{
+		return $this->stability;
+	}
+	public function getPsyche()
+	{
+		return $this->psyche;
+	}
+	public function getMorale()
+	{
+		return $this->morale;
+	}
+	public function getCompetitionExperience()
+	{
+		return $this->competition_experience;
 	}
 
 	/**
