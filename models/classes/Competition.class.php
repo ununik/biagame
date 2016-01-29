@@ -82,16 +82,21 @@ class Competition extends Connection
 
 			$resultsUser[$i]['timePoints'] = $resultsUser[$i]['timePoints'] + $resultsUser[$i]['pronePoints'] + $resultsUser[$i]['standingPoints'];
 			$resultsUser[$i]['timePoints'] += round (($resultsUser[$i]['timePoints'] * ($results[$i]['exeperience']+ 1000))/1000);
-			$resultsUser[$i]['timePoints'] = $resultsUser[$i]['timePoints'] * $resultsUser[$i]['energy'];
+			if($resultsUser[$i]['energy'] != 0){
+				$resultsUser[$i]['timePoints'] = $resultsUser[$i]['timePoints'] * $resultsUser[$i]['energy'];
+			} else {
+				$resultsUser[$i]['timePoints'] = $resultsUser[$i]['timePoints'] * 0.5;
+			}
 
-
+			$timestamp = time();
 			$result = $db->prepare("UPDATE `competition_registration` SET `prone_points`=?, `standing_points`=?, `time_points`=?, `rand`=? WHERE `id`=?");
 			$result->execute(array($resultsUser[$i]['pronePoints'], $resultsUser[$i]['standingPoints'], $resultsUser[$i]['timePoints'], $results[$i]['rand'], $resultsUser[$i]['id']));
 
-			$result = $db->prepare("UPDATE `user` SET `competition_experience`=?, `energy`=? WHERE `id`=?");
-			$result->execute(array($results[$i]['exeperience']+1, $profil->getActulaEnergy() - $resultsUser[$i]['energy'],$resultsUser[$i]['user']));
+			$energy = $profil->getActulaEnergy() - $resultsUser[$i]['energy'];
+			$result = $db->prepare("UPDATE `user` SET `competition_experience`=?, `energy`=?, `lastEnergyTimestamp`=? WHERE `id`=?");
+			$result->execute(array($results[$i]['exeperience']+1, $energy, $timestamp, $resultsUser[$i]['user']));
 
-			$timestamp = time();
+
 			$result = $db->prepare("INSERT INTO `activity`(`user`, `competition`, `timestamp`, `idActivity`) VALUES (?, ?, ?, ?)");
 			$result->execute(array($resultsUser[$i]['user'], 1, $timestamp, $competition));
 	}
@@ -210,5 +215,34 @@ class Competition extends Connection
 		$startList = $result->fetchAll();
 
 		return $startList;
+	}
+
+	public function getDoneCompetitionWithUser($user)
+	{
+		$db = parent::connect();
+		$result = $db->prepare("SELECT `competition` FROM `competition_registration` WHERE `user`=?");
+		$result->execute(array($user));
+		$competitions = $result->fetchAll();
+
+		$item = array();
+		foreach($competitions as $competition)
+		{
+			$timestamp = time();
+			$result = $db->prepare("SELECT * FROM `competition` WHERE (`id`=? && `date`<=?)");
+			$result->execute(array($competition['competition'], $timestamp));
+			$item[] = $result->fetchAll();
+		}
+
+		return $item;
+	}
+
+	public function getResultList($competition)
+	{
+		$db = parent::connect();
+		$result = $db->prepare("SELECT * FROM `competition_registration` WHERE `competition`=? ORDER BY `result` ASC ");
+		$result->execute(array($competition));
+		$list = $result->fetchAll();
+
+		return $list;
 	}
 }
